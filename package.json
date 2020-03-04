@@ -8,13 +8,15 @@
     "@testing-library/user-event": "^7.2.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-dragula": "^1.1.17",
     "react-scripts": "3.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-css": "postcss src/assets/tailwind.css -o src/assets/css/main.css -w"
   },
   "eslintConfig": {
     "extends": "react-app"

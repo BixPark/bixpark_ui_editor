@@ -1,29 +1,67 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
+import Dragula from 'react-dragula';
 import './App.css';
 
-function App() {
+const ButtonComponent = () => {
     return (
-        <div className="max-w-sm rounded overflow-hidden shadow-lg">
-            <img className="w-full" src="https://bixpark.com/media/indian-traditional-2659269_1920_ValRlkj.jpg"
-                 alt="Display"/>
-            <div className="px-6 py-4">
-                <div className="font-bold text-purple-500 text-xl mb-2">
-                    Blessing Krofegha
-                </div>
-                <p className="text-gray-700 text-base">
-                    When i’m not coding i switch to netflix with biscuits and cold tea as my companion. <span></span>😜
-                </p>
-            </div>
-            <div className="px-6 py-4">
-                <span
-                    className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#Software Engineer</span>
-                <span
-                    className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#Writter</span>
-                <span
-                    className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mt-2 ml-20">#Public Speaker</span>
-            </div>
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Button
+        </button>
+    )
+};
+
+const DesignView = ({refId}) => {
+    return (
+        <div ref={refId} className="ui-designer container">
+
         </div>
     );
+};
+const ComponentListView = ({refId}) => {
+    return (
+        <div ref={refId}>
+
+            <ButtonComponent/>
+
+        </div>
+    );
+};
+
+function App() {
+
+    const uiComponentList = useRef(null);
+    const uiDesignComponent = useRef(null);
+
+    useEffect(() => {
+        const right = uiDesignComponent.current;
+        const left = uiComponentList.current;
+        Dragula([left, right], {
+            copySortSource: true,
+            copy: function (el, source) {
+                return source === left
+            },
+            accepts: function (el, target) {
+                return target !== left
+            }
+        });
+    }, [uiComponentList]);
+
+
+    return (
+        <>
+            <div className="flex mb-4">
+                <div className="w-1/2 bg-gray-400 h-12">
+                    <ComponentListView refId={uiComponentList}/>
+                </div>
+                <div className="w-1/2 bg-gray-500 h-12">
+                    <DesignView refId={uiDesignComponent}/>
+                </div>
+            </div>
+
+
+        </>
+    );
+
 }
 
 export default App;
