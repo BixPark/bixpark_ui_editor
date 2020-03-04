@@ -10,6 +10,35 @@ export class HeroData {
     image = "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
 }
 
+const FormEditorData = (data) => {
+    return {
+        "name": {
+            "value": data.name,
+            "type": FieldType.TEXT_FILED,
+            "label": "Title",
+            "placeHolder": "Title",
+        },
+        "subTitle": {
+            "value": data.subTitle,
+            "type": FieldType.TEXT_FILED,
+            "label": "Sub Title",
+            "placeHolder": "Sub Title",
+        },
+        "description": {
+            "value": data.description,
+            "type": FieldType.TEXT_AREA_FILED,
+            "label": "Description",
+            "placeHolder": "Description",
+        },
+
+        "image": {
+            "value": data.image,
+            "type": FieldType.IMAGE_FILED,
+            "label": "Image",
+            "placeHolder": "Image",
+        }
+    }
+}
 
 const ComponentView = ({data}) => {
     return (
@@ -24,38 +53,21 @@ const ComponentView = ({data}) => {
         </div>
     );
 };
+const ComponentPreview = () => {
+    return (
+        <div className="max-w-sm rounded overflow-hidden shadow-lg">
+            <h1>Header Component</h1>
+        </div>
+    );
+};
+
+
 const ComponentDataEditor = ({data, setData}) => {
     const [formData, setFormData] = useState({});
 
     useEffect(() => {
         if (data) {
-            setFormData({
-                "name": {
-                    "value": data.name,
-                    "type": FieldType.TEXT_FILED,
-                    "label": "Title",
-                    "placeHolder": "Title",
-                },
-                "subTitle": {
-                    "value": data.subTitle,
-                    "type": FieldType.TEXT_FILED,
-                    "label": "Sub Title",
-                    "placeHolder": "Sub Title",
-                },
-                "description": {
-                    "value": data.description,
-                    "type": FieldType.TEXT_AREA_FILED,
-                    "label": "Description",
-                    "placeHolder": "Description",
-                },
-
-                "image": {
-                    "value": data.image,
-                    "type": FieldType.IMAGE_FILED,
-                    "label": "Image",
-                    "placeHolder": "Image",
-                }
-            })
+            setFormData(FormEditorData(data))
         }
     }, [data]);
 
@@ -69,14 +81,6 @@ const ComponentDataEditor = ({data, setData}) => {
     }
 
     return (<a>Loading...</a>)
-};
-
-const ComponentPreview = () => {
-    return (
-        <div className="max-w-sm rounded overflow-hidden shadow-lg">
-            <h1>Header Component</h1>
-        </div>
-    );
 };
 
 
