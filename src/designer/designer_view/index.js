@@ -3,9 +3,16 @@ import './index.css'
 
 
 export const DesignView = ({refId}) => {
-    return (
-        <div ref={refId} className="ui-designer container">
 
+    const exportToHtml = () => {
+        const content = refId.current;
+        const htmlContent = content.innerHTML;
+    };
+    return (
+        <div className="flex flex-1 flex-wrap">
+            <button onClick={exportToHtml}>Export</button>
+            <div ref={refId} className="ui-designer container">
+            </div>
         </div>
     );
 };

@@ -3,3 +3,8 @@
 @tailwind components;
 
 @tailwind utilities;
+
+
+#root{
+    @apply flex h-screen bg-gray-100 font-sans
+}

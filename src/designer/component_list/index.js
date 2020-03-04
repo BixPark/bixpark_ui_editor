@@ -5,7 +5,12 @@ import ReactDOM from "react-dom";
 
 const ComponentSelectWrapper = ({id, Component}) => {
     return (
-        <div className="max-w-sm overflow-hidden shadow-lg" id={id}>
+        <div
+            className="border-2 border-gray-400
+            border-dashed hover:border-transparent
+            hover:bg-white hover:shadow-xl rounded
+            p-2 m-2 md:mx-2 md:my-2"
+            id={id}>
             <Component status={"preview"}/>
         </div>
     )
@@ -23,7 +28,7 @@ const ComponentPreviewWrapper = ({id, Component}) => {
 
 export const ComponentListView = ({drake, refId}) => {
 
-    const [componentList, setComponentList] = useState([]);
+    const [componentList, setComponentList] = useState({});
 
     const getComponent = (id) => {
         return componentList[id];
@@ -41,8 +46,7 @@ export const ComponentListView = ({drake, refId}) => {
             });
         }
         setComponentList({
-            "key": "component_1",
-            "component": HeroComponentDesign1
+            "component_1": HeroComponentDesign1
         });
 
         return () => {
@@ -53,13 +57,25 @@ export const ComponentListView = ({drake, refId}) => {
 
 
     return (
-        <div ref={refId}>
-            {Object.entries(componentList).map(([key, value]) => {
-                    return (
-                        <ComponentSelectWrapper key={key} Component={value} id={key}/>
-                    );
-                }
-            )}
-        </div>
+
+        <>
+
+            <div id="dash-content" className="bg-gray-200 py-2 lg:py-0 w-1/4 lg:max-w-sm flex flex-wrap content-start">
+
+
+                <div className="w-1/2 lg:w-full" ref={refId}>
+                    {Object.entries(componentList).map(([key, value]) => {
+                            return (
+                                <ComponentSelectWrapper key={key} Component={value} id={key}/>
+                            );
+                        }
+                    )}
+                </div>
+
+
+            </div>
+
+
+        </>
     );
 };

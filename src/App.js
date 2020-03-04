@@ -3,6 +3,7 @@ import Dragula from 'react-dragula';
 import './App.css';
 import {DesignView} from "./designer/designer_view";
 import {ComponentListView} from "./designer/component_list";
+import {SideBar} from "./designer/component_list/SideBar";
 
 function App() {
 
@@ -36,12 +37,16 @@ function App() {
 
     return (
         <>
-            <div className="flex mb-4">
-                <div className="w-1/2 bg-gray-400 h-12">
-                    <ComponentListView drake={drake} refId={uiComponentList}/>
-                </div>
-                <div className="w-1/2 bg-gray-500 h-12">
-                    <DesignView refId={uiDesignComponent}/>
+            <SideBar/>
+
+
+            <div className="flex flex-row flex-wrap flex w-full flex-grow content-start pl-16">
+                <ComponentListView drake={drake} refId={uiComponentList}/>
+
+                <div id="main-content" className="w-full flex-1">
+
+
+                        <DesignView refId={uiDesignComponent}/>
                 </div>
             </div>
 
