@@ -13,7 +13,7 @@ export class HeroData {
 
 const ComponentView = ({data}) => {
     return (
-        <div className="max-w-sm rounded overflow-hidden shadow-lg w-full">
+        <div className="rounded overflow-hidden shadow-lg w-full">
             <img className="w-full" src={data.image} alt="Sunset in the mountains"/>
             <div className="px-6 py-4">
                 <div className="font-bold text-xl mb-2">{data.name} <small>{data.subTitle}</small></div>
@@ -59,14 +59,16 @@ const ComponentDataEditor = ({data, setData}) => {
         }
     }, [data]);
 
+    if (data) {
 
-    return (
-        <>
+        return (
+            <>
+                <EditorForm data={data} formData={formData} updateData={setData}/>
+            </>
+        );
+    }
 
-            <EditorForm formData={formData} updateData={setData}/>
-
-        </>
-    );
+    return (<a>Loading...</a>)
 };
 
 const ComponentPreview = () => {

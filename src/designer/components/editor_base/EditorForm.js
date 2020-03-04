@@ -1,5 +1,5 @@
 import {Field, Form, Formik} from "formik";
-import React, {useEffect, useState} from "react";
+import React from "react";
 
 export const FieldType = {
     TEXT_FILED: "textFiled",
@@ -8,7 +8,6 @@ export const FieldType = {
 };
 
 const TextField = ({name, label, placeHolder}) => {
-    console.log(name, label, placeHolder);
     return (<div className="flex flex-wrap -mx-3 mb-6">
         <Field name={name}>
 
@@ -101,7 +100,7 @@ const SingleImageField = ({name, label, placeHolder, setFieldValue}) => {
                             reader.onloadend = (e) => {
 
                                 // values.image = e.target.result;
-                                setFieldValue("image", e.target.result);
+                                setFieldValue(name, e.target.result);
 
                             };
 
@@ -109,7 +108,8 @@ const SingleImageField = ({name, label, placeHolder, setFieldValue}) => {
                             reader.readAsDataURL(event.currentTarget.files[0]);
 
 
-                        }}/>
+                        }}
+                        />
                         {meta.touched && meta.error && (
                             <p className="text-red-500 text-xs italic">{meta.error}</p>
                         )}
@@ -135,41 +135,27 @@ const Thumb = ({file}) => {
                  width={200}/>);
 };
 
-export const EditorForm = ({formData, updateData}) => {
-    const [data, setData] = useState({});
-
-    useEffect(() => {
-
-        const data = {};
-
-        for (const [key, value] of Object.entries(formData)) {
-            data[key] = value.value;
-        }
-        setData(data);
-
-    }, [formData]);
-
-
+export const EditorForm = ({formData, data, updateData}) => {
     return (
         <Formik
-            initialValues={data}
+            initialValues={{...data}}
             onSubmit={(values, {setSubmitting}) => {
-                console.log("Values", values);
                 updateData(
                     values
                 )
             }}
         >
-            {({isSubmitting, setFieldValue}) => (
+            {({isSubmitting, setFieldValue, values}) => (
                 <div className={"w-full max-w-lg"}>
                     <Form>
                         {Object.entries(formData).map(([key, value]) => {
-                            console.log(key);
                             switch (value.type) {
                                 case FieldType.TEXT_FILED:
-                                    return <TextField name={key} label={value.label} placeHolder={value.placeHolder}/>;
+                                    return <TextField name={key} label={value.label}
+                                                      placeHolder={value.placeHolder}/>;
                                 case FieldType.TEXT_AREA_FILED:
-                                    return <TextField name={key} label={value.label} placeHolder={value.placeHolder}/>;
+                                    return <TextAreaField name={key} label={value.label}
+                                                          placeHolder={value.placeHolder}/>;
                                 case FieldType.IMAGE_FILED:
                                     return <SingleImageField name={key} label={value.label}
                                                              placeHolder={value.placeHolder}
@@ -184,7 +170,7 @@ export const EditorForm = ({formData, updateData}) => {
                             <button
                                 disabled={isSubmitting}
                                 type={"submit"}
-                                className="px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">Action
+                                className="px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">Save
                             </button>
                             <button
                                 className="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close
