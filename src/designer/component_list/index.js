@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import './index.css'
-import {HeroComponentDesign1} from "../components/hero/design_1";
+import {HeroComponentDesign1, HeroData} from "../components/hero/design_1";
 import ReactDOM from "react-dom";
 
 const EditorModalComponent = ({modalRef, Component, toggleModal, data, setData}) => {
@@ -68,7 +68,7 @@ const EditorModalComponent = ({modalRef, Component, toggleModal, data, setData})
             </div>
         </div>
     )
-}
+};
 
 
 const ComponentSelectWrapper = ({id, Component}) => {
@@ -87,7 +87,7 @@ const ComponentSelectWrapper = ({id, Component}) => {
 
 const ComponentPreviewWrapper = ({id, Component}) => {
     const modalRef = useRef();
-    const [data, setData] = useState({});
+    const [data, setData] = useState(Component.data);
 
     const toggleModal = () => {
         const body = document.querySelector('body');
@@ -101,9 +101,9 @@ const ComponentPreviewWrapper = ({id, Component}) => {
     return (
         <div className="max-w-sm overflow-hidden shadow-lg" id={id}>
             <button onClick={toggleModal}>Edit</button>
-            <Component status={"build"} data={data} setData={setData}/>
+            <Component.component status={"build"} data={data}/>
             <EditorModalComponent modalRef={modalRef} data={data} setData={setData} toggleModal={toggleModal}
-                                  Component={Component}/>
+                                  Component={Component.component}/>
         </div>
     )
 
@@ -112,6 +112,7 @@ const ComponentPreviewWrapper = ({id, Component}) => {
 export const ComponentListView = ({drake, refId}) => {
 
     const [componentList, setComponentList] = useState({});
+
 
     const getComponent = (id) => {
         return componentList[id];
@@ -131,7 +132,10 @@ export const ComponentListView = ({drake, refId}) => {
             });
         }
         setComponentList({
-            "component_1": HeroComponentDesign1
+            "component_1": {
+                "data": new HeroData(),
+                "component": HeroComponentDesign1
+            }
         });
 
         return () => {
@@ -142,25 +146,17 @@ export const ComponentListView = ({drake, refId}) => {
 
 
     return (
-
         <>
-
             <div id="dash-content" className="bg-gray-200 py-2 lg:py-0 w-1/4 lg:max-w-sm flex flex-wrap content-start">
-
-
                 <div className="w-1/2 lg:w-full" ref={refId}>
                     {Object.entries(componentList).map(([key, value]) => {
                             return (
-                                <ComponentSelectWrapper key={key} Component={value} id={key}/>
+                                <ComponentSelectWrapper key={key} Component={value.component} id={key}/>
                             );
                         }
                     )}
                 </div>
-
-
             </div>
-
-
         </>
     );
 };
