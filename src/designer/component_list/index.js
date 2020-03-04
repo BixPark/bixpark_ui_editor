@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import './index.css'
 import {HeroComponentDesign1, HeroData} from "../components/hero/design_1";
 import ReactDOM from "react-dom";
+import {HeroComponentLandingPage, HeroComponentLandingPageData} from "../components/hero/landing_page";
 
 const EditorModalComponent = ({modalRef, Component, toggleModal, data, setData}) => {
 
@@ -135,6 +136,10 @@ export const ComponentListView = ({drake, refId}) => {
             "component_1": {
                 "data": new HeroData(),
                 "component": HeroComponentDesign1
+            },
+            "component_2": {
+                "data": new HeroComponentLandingPageData(),
+                "component": HeroComponentLandingPage
             }
         });
 

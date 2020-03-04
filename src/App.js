@@ -44,9 +44,7 @@ function App() {
                 <ComponentListView drake={drake} refId={uiComponentList}/>
 
                 <div id="main-content" className="w-full flex-1">
-
-
-                        <DesignView refId={uiDesignComponent}/>
+                    <DesignView refId={uiDesignComponent}/>
                 </div>
             </div>
 
