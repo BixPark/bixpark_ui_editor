@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.css'
 import {FieldType} from "../../../component_list/component_data_editor/EditorForm";
+import preview from './preview.svg';
 
 class DataClass {
     header = "The Coldest Sunset";
@@ -60,25 +61,28 @@ const ComponentView = ({data}) => {
 };
 const ComponentPreview = () => {
     return (
-        <div className="max-w-sm rounded overflow-hidden shadow-lg">
-            <h1>Header Component</h1>
+        <div className="text-center">
+            <img src={preview} width={150}/>
+            <h2>Header Section 2</h2>
         </div>
     );
 };
 
 
-const HeroComponent = ({key, status, data, setData}) => {
-    if (status === "preview") {
-        return <ComponentPreview/>;
-    } else {
-        return <ComponentView data={data}/>
-    }
+const HeroComponent = ({data}) => {
+    return <ComponentView data={data}/>
 };
 
 export const HeroComponentDesign1 = () => {
     return {
         "data": new DataClass(),
         "formData": HeroComponentFormEditorData,
-        "component": HeroComponent
+        "component": HeroComponent,
+        "name": "Design 1",
+        "preview": () => {
+            return (
+                <img src={preview} width={150}/>
+            );
+        }
     }
 };

@@ -23,6 +23,10 @@ function App() {
         },
         getSiteData: () => {
             return siteData;
+        },
+        removeContent: (id) => {
+            document.getElementById(id).remove();
+            delete siteData[id];
         }
     };
 

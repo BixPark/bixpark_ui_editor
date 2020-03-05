@@ -1,8 +1,9 @@
 import React from 'react';
 import './index.css'
 import {FieldType} from "../../../component_list/component_data_editor/EditorForm";
+import preview from "./preview.svg";
 
-export class HeroComponentLandingPageData {
+class PageData {
     tagLine = "TAGLINE";
     title = "No paper plane can be made without paper";
     article = "Professional, dedicated, local. Dunder Mifflin is " +
@@ -14,7 +15,7 @@ export class HeroComponentLandingPageData {
     buttonName = "Sign up";
 }
 
-export const HeroComponentLandingFormEditorData = (data) => {
+const FormEditorData = (data) => {
     return {
         "tagLine": {
             "value": data.tagLine,
@@ -59,9 +60,10 @@ export const HeroComponentLandingFormEditorData = (data) => {
             "placeHolder": "Button Link",
         },
     }
-}
+};
 
-const ComponentView = ({data}) => {
+
+const HeroComponentLandingPage = ({data}) => {
     return (
         <section className="py-12 px-4 w-full text-center">
             <div className="w-full max-w-2xl mx-auto"><span className="text-sm font-semibold">{data.tagLine}</span>
@@ -73,35 +75,21 @@ const ComponentView = ({data}) => {
                                                                    href={data.linkTo}>{data.linkName}</a></div>
             </div>
         </section>
-    );
-};
-
-const ComponentPreview = () => {
-    return (
-        <div className="max-w-sm rounded overflow-hidden shadow-lg">
-            <h1>Header component</h1>
-        </div>
-    );
-};
-
-
-const HeroComponentLandingPage = ({key, status, data, setData}) => {
-    console.log(status, setData);
-    if (status === "preview") {
-        return <ComponentPreview/>;
-    } else {
-        return <ComponentView data={data}/>
-    }
+    )
 };
 
 
 export const HeroComponentDesign2 = () => {
-    const path = require('path');
     return {
-        "data": new HeroComponentLandingPageData(),
-        "formData": HeroComponentLandingFormEditorData,
+        "data": new PageData(),
+        "formData": FormEditorData,
         "component": HeroComponentLandingPage,
-        "style": React.createElement("style",)
-
+        "style": React.createElement("style",),
+        "name": "Design 2",
+        "preview": () => {
+            return (
+                <img src={preview} width={150} alt={"design"}/>
+            );
+        }
     }
 };

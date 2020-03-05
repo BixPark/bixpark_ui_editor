@@ -7,14 +7,21 @@ import {EditorModalComponent} from "./component_data_editor/EditorForm";
 
 
 const ComponentSelectWrapper = ({id, Component}) => {
+    console.log(Component);
     return (
         <div
-            className="border-2 border-gray-400
+            className="border-2 border-gray-500
             border-dashed hover:border-transparent
-            hover:bg-white hover:shadow-xl rounded
-            p-2 m-2 md:mx-2 md:my-2"
+            hover:bg-gray-600 hover:shadow-xl rounded
+            p-2 m-2 md:mx-2 md:my-2 flex justify-center bg-gray-500"
             id={id}>
-            <Component status={"preview"}/>
+            <div className="ml-auto mr-auto text-white">
+                <div className="text-center">
+                    <Component.preview/>
+                    <h2>{Component.name}</h2>
+                </div>
+
+            </div>
         </div>
     )
 
@@ -23,6 +30,7 @@ const ComponentSelectWrapper = ({id, Component}) => {
 const ComponentPreviewWrapper = ({id, Component, dataManager}) => {
     const modalRef = useRef();
     const [data, setData] = useState(Component.data);
+    const [isEditorPanelVisible, setEditorPanelVisible] = useState(false);
 
     const toggleModal = () => {
         const body = document.querySelector('body');
@@ -37,6 +45,14 @@ const ComponentPreviewWrapper = ({id, Component, dataManager}) => {
             dataManager.notify(Component, id, data);
     }, [id, dataManager, data]);
 
+    const toggleEditorPanel = () => {
+        setEditorPanelVisible(!isEditorPanelVisible);
+    };
+
+    const deleteContent = (id) => {
+        dataManager.removeContent(id)
+    };
+
 
     return (
         <div className="flex
@@ -47,15 +63,34 @@ const ComponentPreviewWrapper = ({id, Component, dataManager}) => {
         border-dashed
         border-2
         border-transparent
-        " id={`child_${id}`}>
-            <div className="absolute group-hover:visible  top-0 left-0 bg-gray-700">
-                <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    onClick={toggleModal}>Edit
-                </button>
-            </div>
+        " id={`child_${id}`} onMouseEnter={() => {
+            toggleEditorPanel()
+        }} onMouseLeave={() => {
+            toggleEditorPanel()
+        }}>
+            {isEditorPanelVisible &&
+            (<>
+                <div className="absolute w-full h-full left-0 z-50 p-4">
+                    <button
+                        className="rounded  bg-blue-700 p-1 text-white px-2"
+                        onClick={toggleModal}>Content <i className="fa fa-paint-brush"></i>
+                    </button>
+                    <button
+                        className="rounded  bg-red-700 p-1 text-white px-2 mx-2"
+                        onClick={() => {
+                            deleteContent(id)
+                        }}><i className="fa fa-trash"></i>
+                    </button>
+                </div>
+                <div className="absolute w-full h-full bg-gray-100 left-0 opacity-75 z-10">
+                </div>
+            </>)
+            }
+
             <Component.component status={"build"} data={data}/>
-            <EditorModalComponent modalRef={modalRef} data={data} setData={setData} toggleModal={toggleModal}
+            <EditorModalComponent modalRef={modalRef} data={data}
+                                  setData={setData}
+                                  toggleModal={toggleModal}
                                   Component={Component}/>
         </div>
     )
@@ -113,7 +148,7 @@ export const ComponentListView = ({drake, refId, designerViewId, dataManager}) =
                 <div className="w-1/2 lg:w-full" ref={refId}>
                     {Object.entries(componentList).map(([key, value]) => {
                             return (
-                                <ComponentSelectWrapper key={key} Component={value.component} id={key}/>
+                                <ComponentSelectWrapper key={key} Component={value} id={key}/>
                             );
                         }
                     )}

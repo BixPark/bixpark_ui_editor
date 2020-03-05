@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="202px" height="90px" viewBox="0 0 202 90" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns="http://www.w3.org/2000/svg">
+    <desc>Created with Lunacy</desc>
+    <path d="M0 0L100 0L100 2L0 2L0 0Z" transform="translate(50 55.25)" id="Rectangle-Copy-3" fill="#FFFFFF"
+          stroke="none"/>
+    <path d="M0 0L50 0L50 2L0 2L0 0Z" transform="translate(75 52)" id="Rectangle-Copy-7" fill="#FFFFFF" stroke="none"/>
+    <path d="M0 0L150 0L150 2L0 2L0 0Z" transform="translate(25 58.5)" id="Rectangle-Copy-4" fill="#FFFFFF"
+          stroke="none"/>
+    <path d="M0 0L50 0L50 2L0 2L0 0Z" transform="translate(75 65)" id="Rectangle-Copy-5" fill="#FFFFFF" stroke="none"/>
+    <path d="M0 0L100 0L100 2L0 2L0 0Z" transform="translate(50 61.75)" id="Rectangle-Copy-6" fill="#FFFFFF"
+          stroke="none"/>
+    <path d="M0 0L201.571 0L201.571 11L0 11L0 0Z" transform="translate(0 29.00002)" id="Rectangle-Copy-2" fill="#FFFFFF"
+          stroke="none"/>
+    <path d="M0 0L150 0L150 11L0 11L0 0Z" transform="translate(25 14.00003)" id="Rectangle-Copy" fill="#FFFFFF"
+          stroke="none"/>
+    <path d="M0 0L83 0L83 7L0 7L0 0Z" transform="translate(59 0)" id="Rectangle" fill="#FFFFFF" stroke="none"/>
+    <path d="M5.999 0L23.001 0C26.3142 0 29 2.68584 29 5.999L29 6.001C29 9.31416 26.3142 12 23.001 12L5.999 12C2.68584 12 0 9.31416 0 6.001L0 5.999C0 2.68584 2.68584 0 5.999 0Z"
+          transform="translate(113 77.00002)" id="Rectangle-2-Copy" fill="#D3D3D3" stroke="none"/>
+    <path d="M5.999 0L23.001 0C26.3142 0 29 2.68584 29 5.999L29 6.001C29 9.31416 26.3142 12 23.001 12L5.999 12C2.68584 12 0 9.31416 0 6.001L0 5.999C0 2.68584 2.68584 0 5.999 0Z"
+          transform="translate(58.99998 77.00002)" id="Rectangle-2" fill="#D3D3D3" stroke="none"/>
+</svg>
