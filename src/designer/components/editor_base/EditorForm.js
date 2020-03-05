@@ -151,13 +151,13 @@ export const EditorForm = ({formData, data, updateData}) => {
                         {Object.entries(formData).map(([key, value]) => {
                             switch (value.type) {
                                 case FieldType.TEXT_FILED:
-                                    return <TextField name={key} label={value.label}
+                                    return <TextField key={key} name={key} label={value.label}
                                                       placeHolder={value.placeHolder}/>;
                                 case FieldType.TEXT_AREA_FILED:
-                                    return <TextAreaField name={key} label={value.label}
+                                    return <TextAreaField key={key} name={key} label={value.label}
                                                           placeHolder={value.placeHolder}/>;
                                 case FieldType.IMAGE_FILED:
-                                    return <SingleImageField name={key} label={value.label}
+                                    return <SingleImageField key={key} name={key} label={value.label}
                                                              placeHolder={value.placeHolder}
                                                              setFieldValue={setFieldValue}/>;
                                 default:

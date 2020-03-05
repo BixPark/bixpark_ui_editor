@@ -127,7 +127,7 @@ export const ComponentListView = ({drake, refId}) => {
                     const Component = getComponent(el.id);
                     let newNode = document.createElement("div");
                     // let component = React.createElement(HeroComponentDesign1, {status: "build"});
-                    ReactDOM.hydrate(<ComponentPreviewWrapper Component={Component} id={componentId}/>, newNode);
+                    ReactDOM.render(<ComponentPreviewWrapper Component={Component} id={componentId}/>, newNode);
                     el.parentNode.replaceChild(newNode, el);
                 }
             });
