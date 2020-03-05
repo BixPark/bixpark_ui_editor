@@ -18,18 +18,6 @@ export const HeroComponentLandingFormEditorData = (data) => {
             "label": "Title",
             "placeHolder": "Title",
         },
-        "subTitle": {
-            "value": data.subTitle,
-            "type": FieldType.TEXT_FILED,
-            "label": "Sub Title",
-            "placeHolder": "Sub Title",
-        },
-        "description": {
-            "value": data.description,
-            "type": FieldType.TEXT_AREA_FILED,
-            "label": "Description",
-            "placeHolder": "Description",
-        },
 
         "image": {
             "value": data.image,
