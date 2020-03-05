@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './index.css'
-import {EditorForm, FieldType} from "../../editor_base/EditorForm";
+import {FieldType} from "../../editor_base/EditorForm";
 
 export class HeroComponentLandingPageData {
     name = "The Coldest Sunset";
@@ -10,7 +10,7 @@ export class HeroComponentLandingPageData {
     image = "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
 }
 
-const FormEditorData = (data) => {
+export const HeroComponentLandingFormEditorData = (data) => {
     return {
         "name": {
             "value": data.name,
@@ -49,8 +49,9 @@ const ComponentView = ({data}) => {
                          backgroundRepeat: 'no-repeat',
                      }
                  }>
-            <div className="bg-white text-black rounded-full h-16 w-16 flex items-center justify-center mb-8"><i
-                className="fas fa-play ml-1"></i></div>
+            <div className="bg-white text-black rounded-full h-16 w-16 flex items-center justify-center mb-8">
+                <i className="fas fa-play ml-1"></i>
+            </div>
             <label htmlFor="" className="uppercase tracking-extrawide text-white text-xs font-hairline mt-8">Watch
                 Video</label>
             <h3 className="text-white mx-auto max-w-sm mt-4 font-normal text-2xl leading-normal">Differentiate Yourself
@@ -69,36 +70,20 @@ const ComponentPreview = () => {
 };
 
 
-const ComponentDataEditor = ({data, setData}) => {
-    const [formData, setFormData] = useState({});
-
-    useEffect(() => {
-        if (data) {
-            setFormData(FormEditorData(data))
-        }
-    }, [data]);
-
-    if (data) {
-
-        return (
-            <>
-                <EditorForm data={data} formData={formData} updateData={setData}/>
-            </>
-        );
+const HeroComponentLandingPage = ({key, status, data, setData}) => {
+    console.log(status, setData);
+    if (status === "preview") {
+        return <ComponentPreview/>;
+    } else {
+        return <ComponentView data={data}/>
     }
-
-    return (<a>Loading...</a>)
 };
 
 
-export const HeroComponentLandingPage = ({key, status, data, setData}) => {
-    console.log(status, setData);
-    switch (status) {
-        case "preview":
-            return <ComponentPreview/>;
-        case "editor":
-            return <ComponentDataEditor data={data} setData={setData}/>;
-        default:
-            return <ComponentView data={data}/>
+export const HeroComponentDesign2 = () => {
+    return {
+        "data": new HeroComponentLandingPageData(),
+        "formData": HeroComponentLandingFormEditorData,
+        "component": HeroComponentLandingPage
     }
 };

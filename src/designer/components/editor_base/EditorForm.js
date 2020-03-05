@@ -1,5 +1,5 @@
 import {Field, Form, Formik} from "formik";
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 export const FieldType = {
     TEXT_FILED: "textFiled",
@@ -135,7 +135,7 @@ const Thumb = ({file}) => {
                  width={200}/>);
 };
 
-export const EditorForm = ({formData, data, updateData}) => {
+const EditorForm = ({formData, data, updateData}) => {
     return (
         <Formik
             initialValues={{...data}}
@@ -182,4 +182,72 @@ export const EditorForm = ({formData, data, updateData}) => {
         </Formik>
     );
 
+};
+
+
+export const EditorModalComponent = ({modalRef, Component, toggleModal, data, setData}) => {
+    const [formData, setFormData] = useState({});
+
+    useEffect(() => {
+        if (data) {
+            setFormData(Component.formData(data))
+        }
+    }, [data]);
+
+    useEffect(() => {
+        const overlay = document.querySelector('.modal-overlay');
+        overlay.addEventListener('click', toggleModal);
+
+        let closemodal = document.querySelectorAll('.modal-close');
+        for (let i = 0; i < closemodal.length; i++) {
+            closemodal[i].addEventListener('click', toggleModal);
+        }
+
+        document.onkeydown = function (evt) {
+            evt = evt || window.event;
+            let isEscape = false;
+            if ("key" in evt) {
+                isEscape = (evt.key === "Escape" || evt.key === "Esc")
+            } else {
+                isEscape = (evt.keyCode === 27)
+            }
+            if (isEscape && document.body.classList.contains('modal-active')) {
+                toggleModal()
+            }
+        };
+
+    });
+
+
+    return (
+        <div ref={modalRef}
+             className="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+            <div className="modal-overlay absolute w-full h-full bg-white opacity-95"></div>
+
+            <div className="modal-container fixed w-full h-full z-50 overflow-y-auto ">
+
+                <div
+                    className="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-black text-sm z-50">
+                    <svg className="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                         viewBox="0 0 18 18">
+                        <path
+                            d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                    </svg>
+                    (Esc)
+                </div>
+
+
+                <div className="modal-content container mx-auto h-auto text-left p-4">
+
+                    <div className="flex justify-between items-center pb-2">
+                        <p className="text-2xl font-bold">Full Screen Modal!</p>
+                    </div>
+
+                    <EditorForm data={data} formData={formData} updateData={setData}/>
+
+
+                </div>
+            </div>
+        </div>
+    )
 };

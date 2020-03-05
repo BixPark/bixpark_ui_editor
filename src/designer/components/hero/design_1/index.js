@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './index.css'
-import {EditorForm, FieldType} from "../../editor_base/EditorForm";
+import {FieldType} from "../../editor_base/EditorForm";
 
 export class HeroData {
     name = "The Coldest Sunset";
@@ -10,7 +10,7 @@ export class HeroData {
     image = "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
 }
 
-const FormEditorData = (data) => {
+export const HeroComponentFormEditorData = (data) => {
     return {
         "name": {
             "value": data.name,
@@ -62,36 +62,18 @@ const ComponentPreview = () => {
 };
 
 
-const ComponentDataEditor = ({data, setData}) => {
-    const [formData, setFormData] = useState({});
-
-    useEffect(() => {
-        if (data) {
-            setFormData(FormEditorData(data))
-        }
-    }, [data]);
-
-    if (data) {
-
-        return (
-            <>
-                <EditorForm data={data} formData={formData} updateData={setData}/>
-            </>
-        );
+const HeroComponent = ({key, status, data, setData}) => {
+    if (status === "preview") {
+        return <ComponentPreview/>;
+    } else {
+        return <ComponentView data={data}/>
     }
-
-    return (<a>Loading...</a>)
 };
 
-
-export const HeroComponentDesign1 = ({key, status, data, setData}) => {
-    console.log(status, setData);
-    switch (status) {
-        case "preview":
-            return <ComponentPreview/>;
-        case "editor":
-            return <ComponentDataEditor data={data} setData={setData}/>;
-        default:
-            return <ComponentView data={data}/>
+export const HeroComponentDesign1 = () => {
+    return {
+        "data": new HeroData(),
+        "formData": HeroComponentFormEditorData,
+        "component": HeroComponent
     }
 };
