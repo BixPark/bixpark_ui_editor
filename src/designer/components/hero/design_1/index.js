@@ -2,27 +2,29 @@ import React from 'react';
 import './index.css'
 import {FieldType} from "../../../component_list/component_data_editor/EditorForm";
 
-export class HeroData {
-    name = "The Coldest Sunset";
-    subTitle = "The Coldest Sunset 222";
-    description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et" +
-        "perferendis eaque, exercitationem praesentium nihil.";
+class DataClass {
+    header = "The Coldest Sunset";
+    client = "Client Name";
+    description = "Great offer, competitive prices, professional service.That’s " +
+        "how I’d remember the Dunder Mifflin. " +
+        "Although I had to switch paper provider, sometimes I really miss Dunder family." +
+        " I also got gift basket from the team!";
     image = "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
 }
 
 export const HeroComponentFormEditorData = (data) => {
     return {
-        "name": {
-            "value": data.name,
+        "header": {
+            "value": data.header,
             "type": FieldType.TEXT_FILED,
-            "label": "Title",
-            "placeHolder": "Title",
+            "label": "Header",
+            "placeHolder": "Header",
         },
-        "subTitle": {
-            "value": data.subTitle,
+        "client": {
+            "value": data.client,
             "type": FieldType.TEXT_FILED,
-            "label": "Sub Title",
-            "placeHolder": "Sub Title",
+            "label": "Client",
+            "placeHolder": "Client",
         },
         "description": {
             "value": data.description,
@@ -42,15 +44,18 @@ export const HeroComponentFormEditorData = (data) => {
 
 const ComponentView = ({data}) => {
     return (
-        <div className="rounded overflow-hidden shadow-lg w-full">
-            <img className="w-full" src={data.image} alt="Sunset in the mountains"/>
-            <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2">{data.name} <small>{data.subTitle}</small></div>
-                <p className="text-gray-700 text-base">
-                    {data.description}
-                </p>
+        <section className="py-12 px-4 w-full text-center">
+            <h2 className="text-4xl mb-8 font-heading">{data.header}</h2>
+            <div className="max-w-2xl mx-auto"><img
+                className="mt-6 rounded-lg shadow-xl mt-8 h-64 w-full object-cover object-center"
+                src={data.image}
+                alt=""/>
+                <div>
+                    <h3 className="text-2xl mb-4 font-heading">{data.client}</h3>
+                    <p className="text-gray-500 leading-relaxed">{data.description}</p>
+                </div>
             </div>
-        </div>
+        </section>
     );
 };
 const ComponentPreview = () => {
@@ -72,7 +77,7 @@ const HeroComponent = ({key, status, data, setData}) => {
 
 export const HeroComponentDesign1 = () => {
     return {
-        "data": new HeroData(),
+        "data": new DataClass(),
         "formData": HeroComponentFormEditorData,
         "component": HeroComponent
     }
