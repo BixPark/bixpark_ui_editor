@@ -1,8 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import './index.css'
-import {HeroComponentDesign1} from "../components/hero/design_1";
 import ReactDOM from "react-dom";
-import {HeroComponentDesign2} from "../components/hero/landing_page";
 import {EditorModalComponent} from "./component_data_editor/EditorForm";
 import {ComponentType} from "../components";
 import {ComponentRegistry} from "../components/registry";
@@ -11,20 +9,25 @@ import {ComponentRegistry} from "../components/registry";
 const ComponentSelectWrapper = ({id, Component, selectedComponentType}) => {
     console.log(Component);
     return (
-        <div
-            className="border-2 border-gray-500
+        <div className="border-2
             cursor-move
-            border-dashed hover:border-transparent
-            hover:bg-gray-600 hover:shadow-xl rounded
-            p-2 m-2 md:mx-2 md:my-2 flex justify-center bg-gray-500"
-            id={id}>
-            <div className="ml-auto mr-auto text-white">
-                <div className="text-center">
-                    <Component.preview/>
-                    <h2> {(selectedComponentType === ComponentType.ALL) &&
-                    <strong>({Component.type})</strong>} {Component.name} </h2>
-                </div>
+            border-dashed
+            border-transparent
+            hover:border-gray-500
+            hover:shadow-xl rounded m-2 p-1 " id={id}>
+            <div
+                className="hover:bg-blue-700 bg-blue-500
+            flex justify-center rounded
+            shadow-lg"
+            >
+                <div className="ml-auto py-2 mr-auto text-white">
+                    <div className="text-center">
+                        <Component.preview/>
+                        <h2> {(selectedComponentType === ComponentType.ALL) &&
+                        <strong>({Component.type})</strong>} {Component.name} </h2>
+                    </div>
 
+                </div>
             </div>
         </div>
     )
@@ -141,7 +144,8 @@ export const ComponentListView = ({drake, refId, designerViewId, dataManager}) =
     return (
         <>
             <div id="dash-content"
-                 className="bg-gray-200 py-2 lg:py-0 w-1/6 h-screen flex flex-wrap content-start overflow-auto">
+                 className="bg-gray-200 border-l-2 border-gray-400
+                 py-2 lg:py-0 w-1/6 h-screen flex flex-wrap content-start overflow-auto">
 
                 <nav className="flex flex-wrap items-center justify-center p-2 pb-4">
 
