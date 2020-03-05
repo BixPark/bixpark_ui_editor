@@ -135,55 +135,6 @@ const Thumb = ({file}) => {
                  width={200}/>);
 };
 
-const EditorForm = ({formData, data, updateData}) => {
-    return (
-        <Formik
-            initialValues={{...data}}
-            onSubmit={(values, {setSubmitting}) => {
-                updateData(
-                    values
-                )
-            }}
-        >
-            {({isSubmitting, setFieldValue, values}) => (
-                <div className="w-full max-w-lg h-screen max-h-screen">
-                    <Form>
-                        {Object.entries(formData).map(([key, value]) => {
-                            switch (value.type) {
-                                case FieldType.TEXT_FILED:
-                                    return <TextField key={key} name={key} label={value.label}
-                                                      placeHolder={value.placeHolder}/>;
-                                case FieldType.TEXT_AREA_FILED:
-                                    return <TextAreaField key={key} name={key} label={value.label}
-                                                          placeHolder={value.placeHolder}/>;
-                                case FieldType.IMAGE_FILED:
-                                    return <SingleImageField key={key} name={key} label={value.label}
-                                                             placeHolder={value.placeHolder}
-                                                             setFieldValue={setFieldValue}/>;
-                                default:
-                                    return (<></>);
-                            }
-                        })}
-
-
-                        <div className="flex justify-end pt-2">
-                            <button
-                                disabled={isSubmitting}
-                                type={"submit"}
-                                className="px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">Save
-                            </button>
-                            <button
-                                className="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close
-                            </button>
-                        </div>
-                    </Form>
-                </div>
-            )}
-        </Formik>
-    );
-
-};
-
 
 export const EditorModalComponent = ({modalRef, Component, toggleModal, data, setData}) => {
     const [formData, setFormData] = useState({});
@@ -221,7 +172,7 @@ export const EditorModalComponent = ({modalRef, Component, toggleModal, data, se
 
     return (
         <div ref={modalRef}
-            className="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+             className="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
             <div className="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
             <div
@@ -249,7 +200,51 @@ export const EditorModalComponent = ({modalRef, Component, toggleModal, data, se
                         </div>
                     </div>
 
-                    <EditorForm data={data} formData={formData} updateData={setData}/>
+                    <Formik
+                        initialValues={{...data}}
+                        onSubmit={(values, {setSubmitting}) => {
+                            setData(
+                                values
+                            );
+                            toggleModal();
+                        }}
+                    >
+                        {({isSubmitting, setFieldValue, values}) => (
+                            <div className="w-full h-screen max-h-screen">
+                                <Form>
+                                    {Object.entries(formData).map(([key, value]) => {
+                                        switch (value.type) {
+                                            case FieldType.TEXT_FILED:
+                                                return <TextField key={key} name={key} label={value.label}
+                                                                  placeHolder={value.placeHolder}/>;
+                                            case FieldType.TEXT_AREA_FILED:
+                                                return <TextAreaField key={key} name={key} label={value.label}
+                                                                      placeHolder={value.placeHolder}/>;
+                                            case FieldType.IMAGE_FILED:
+                                                return <SingleImageField key={key} name={key} label={value.label}
+                                                                         placeHolder={value.placeHolder}
+                                                                         setFieldValue={setFieldValue}/>;
+                                            default:
+                                                return (<></>);
+                                        }
+                                    })}
+
+
+                                    <div className="flex justify-end pt-2">
+                                        <button
+                                            disabled={isSubmitting}
+                                            type="submit"
+                                            className="px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">
+                                            Save
+                                        </button>
+                                        <button
+                                            className="modal-close px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">Close
+                                        </button>
+                                    </div>
+                                </Form>
+                            </div>
+                        )}
+                    </Formik>
 
                 </div>
             </div>
