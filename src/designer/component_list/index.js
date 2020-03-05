@@ -102,6 +102,14 @@ export const ComponentListView = ({drake, refId, designerViewId, dataManager}) =
         <>
             <div id="dash-content"
                  className="bg-gray-200 py-2 lg:py-0 w-1/4 lg:max-w-sm h-screen flex flex-wrap content-start">
+
+                <nav className="flex flex-wrap items-center justify-center p-2 pb-4">
+
+                    <h1 className="text-md text-indigo-500 font-semibold">
+                        Select component and drag to canvas <i className="fa fa-hand-point-down"></i></h1>
+
+                </nav>
+
                 <div className="w-1/2 lg:w-full" ref={refId}>
                     {Object.entries(componentList).map(([key, value]) => {
                             return (
