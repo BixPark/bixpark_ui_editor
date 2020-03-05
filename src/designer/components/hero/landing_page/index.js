@@ -3,48 +3,75 @@ import './index.css'
 import {FieldType} from "../../editor_base/EditorForm";
 
 export class HeroComponentLandingPageData {
-    name = "The Coldest Sunset";
-    subTitle = "The Coldest Sunset 222";
-    description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et" +
-        "perferendis eaque, exercitationem praesentium nihil.";
-    image = "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+    tagLine = "TAGLINE";
+    title = "No paper plane can be made without paper";
+    article = "Professional, dedicated, local. Dunder Mifflin is " +
+        "on its best patch to change the way you think about paper. That’s us - people who sell limitless " +
+        "paper in the paperless world.";
+    linkTo = "#";
+    linkName = "Learn more";
+    buttonLink = "#";
+    buttonName = "Sign up";
 }
 
 export const HeroComponentLandingFormEditorData = (data) => {
     return {
-        "name": {
-            "value": data.name,
+        "tagLine": {
+            "value": data.tagLine,
+            "type": FieldType.TEXT_FILED,
+            "label": "TagLine",
+            "placeHolder": "TagLine",
+        },
+        "title": {
+            "value": data.title,
             "type": FieldType.TEXT_FILED,
             "label": "Title",
             "placeHolder": "Title",
         },
-
-        "image": {
-            "value": data.image,
-            "type": FieldType.IMAGE_FILED,
-            "label": "Image",
-            "placeHolder": "Image",
-        }
+        "article": {
+            "value": data.article,
+            "type": FieldType.TEXT_AREA_FILED,
+            "label": "Article",
+            "placeHolder": "Article",
+        },
+        "linkTo": {
+            "value": data.linkTo,
+            "type": FieldType.TEXT_FILED,
+            "label": "Link To",
+            "placeHolder": "Link To",
+        },
+        "linkName": {
+            "value": data.linkName,
+            "type": FieldType.TEXT_FILED,
+            "label": "Link Name",
+            "placeHolder": "Link Name",
+        },
+        "buttonName": {
+            "value": data.buttonName,
+            "type": FieldType.TEXT_FILED,
+            "label": "Button Name",
+            "placeHolder": "Button Name",
+        },
+        "buttonLink": {
+            "value": data.buttonLink,
+            "type": FieldType.TEXT_FILED,
+            "label": "Button Link",
+            "placeHolder": "Button Link",
+        },
     }
 }
 
 const ComponentView = ({data}) => {
     return (
-        <section className="font-sans h-screen w-full bg-cover text-center flex flex-col items-center justify-center"
-                 style={
-                     {
-                         backgroundImage: `url({data.image})`,
-                         backgroundRepeat: 'no-repeat',
-                     }
-                 }>
-            <div className="bg-white text-black rounded-full h-16 w-16 flex items-center justify-center mb-8">
-                <i className="fas fa-play ml-1"></i>
+        <section className="py-12 px-4 w-full text-center">
+            <div className="w-full max-w-2xl mx-auto"><span className="text-sm font-semibold">{data.tagLine}</span>
+                <h2 className="text-5xl mt-2 mb-6 leading-tight font-heading">{data.title}</h2>
+                <p className="mb-8 text-gray-500 leading-relaxed">{data.article}</p>
+                <div><a
+                    className="inline-block py-4 px-8 mr-6 leading-none text-white bg-indigo-500 hover:bg-indigo-600 rounded shadow"
+                    href={data.buttonLink}>{data.buttonName}</a><a className="text-blue-700 hover:underline"
+                                                                   href={data.linkTo}>{data.linkName}</a></div>
             </div>
-            <label htmlFor="" className="uppercase tracking-extrawide text-white text-xs font-hairline mt-8">Watch
-                Video</label>
-            <h3 className="text-white mx-auto max-w-sm mt-4 font-normal text-2xl leading-normal">Differentiate Yourself
-                And Attract
-                More Attention Sales And Profits</h3>
         </section>
     );
 };
@@ -52,7 +79,7 @@ const ComponentView = ({data}) => {
 const ComponentPreview = () => {
     return (
         <div className="max-w-sm rounded overflow-hidden shadow-lg">
-            <h1>Header Component Landing</h1>
+            <h1>Header component</h1>
         </div>
     );
 };
@@ -69,9 +96,12 @@ const HeroComponentLandingPage = ({key, status, data, setData}) => {
 
 
 export const HeroComponentDesign2 = () => {
+    const path = require('path');
     return {
         "data": new HeroComponentLandingPageData(),
         "formData": HeroComponentLandingFormEditorData,
-        "component": HeroComponentLandingPage
+        "component": HeroComponentLandingPage,
+        "style": React.createElement("style",)
+
     }
 };

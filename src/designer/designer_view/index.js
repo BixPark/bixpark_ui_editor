@@ -69,7 +69,7 @@ export const DesignView = ({refId, drake, dataManager}) => {
                             </div>
                         </div>
                     </div>
-                    <div ref={refId} className="ui-designer h-full h-16 container overflow-y-auto py-2 px-3">
+                    <div ref={refId} className="ui-designer h-full h-16 flex flex-col  container overflow-y-auto py-2 px-3">
                     </div>
                 </div>
             </div>
