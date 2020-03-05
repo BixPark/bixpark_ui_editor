@@ -34,8 +34,21 @@ const ComponentPreviewWrapper = ({id, Component}) => {
 
 
     return (
-        <div className="overflow-hidden" id={id}>
-            <button onClick={toggleModal}>Edit</button>
+        <div className="flex
+        group
+        relative
+        flex-wrap focus:shadow-outline
+        hover:border-blue-800
+        border-dashed
+        border-2
+        border-transparent
+        " id={id}>
+            <div className="absolute group-hover:visible  top-0 left-0 bg-gray-700">
+                <button
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={toggleModal}>Edit
+                </button>
+            </div>
             <Component.component status={"build"} data={data}/>
             <EditorModalComponent modalRef={modalRef} data={data} setData={setData} toggleModal={toggleModal}
                                   Component={Component}/>
