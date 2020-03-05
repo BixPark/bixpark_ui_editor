@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.css'
-import {FieldType} from "../../editor_base/EditorForm";
+import {FieldType} from "../../../component_list/component_data_editor/EditorForm";
 
 export class HeroData {
     name = "The Coldest Sunset";

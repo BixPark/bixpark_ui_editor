@@ -3,7 +3,7 @@ import './index.css'
 import {HeroComponentDesign1} from "../components/hero/design_1";
 import ReactDOM from "react-dom";
 import {HeroComponentDesign2} from "../components/hero/landing_page";
-import {EditorModalComponent} from "../components/editor_base/EditorForm";
+import {EditorModalComponent} from "./component_data_editor/EditorForm";
 
 
 const ComponentSelectWrapper = ({id, Component}) => {
