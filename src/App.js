@@ -40,10 +40,10 @@ function App() {
             <SideBar/>
 
 
-            <div className="flex flex-row flex-wrap flex w-full flex-grow content-start pl-16">
+            <div className="h-screen flex flex-row flex-wrap flex w-full flex-grow content-start pl-16">
                 <ComponentListView drake={drake} refId={uiComponentList}/>
 
-                <div id="main-content" className="w-full flex-1">
+                <div id="main-content" className="w-full flex-1  h-screen">
                     <DesignView refId={uiDesignComponent}/>
                 </div>
             </div>

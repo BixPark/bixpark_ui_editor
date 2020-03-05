@@ -100,7 +100,7 @@ const ComponentPreviewWrapper = ({id, Component}) => {
 
 
     return (
-        <div className="max-w-sm overflow-hidden shadow-lg" id={id}>
+        <div className="object-contain h-48 w-full" id={id}>
             <button onClick={toggleModal}>Edit</button>
             <Component.component status={"build"} data={data}/>
             <EditorModalComponent modalRef={modalRef} data={data} setData={setData} toggleModal={toggleModal}
@@ -152,7 +152,7 @@ export const ComponentListView = ({drake, refId}) => {
 
     return (
         <>
-            <div id="dash-content" className="bg-gray-200 py-2 lg:py-0 w-1/4 lg:max-w-sm flex flex-wrap content-start">
+            <div id="dash-content" className="bg-gray-200 py-2 lg:py-0 w-1/4 lg:max-w-sm h-screen flex flex-wrap content-start">
                 <div className="w-1/2 lg:w-full" ref={refId}>
                     {Object.entries(componentList).map(([key, value]) => {
                             return (
