@@ -20,7 +20,7 @@ const ComponentSelectWrapper = ({id, Component}) => {
 
 };
 
-const ComponentPreviewWrapper = ({id, Component}) => {
+const ComponentPreviewWrapper = ({id, Component, dataManager}) => {
     const modalRef = useRef();
     const [data, setData] = useState(Component.data);
 
@@ -32,6 +32,11 @@ const ComponentPreviewWrapper = ({id, Component}) => {
         body.classList.toggle('modal-active');
     };
 
+    useEffect(() => {
+        if (dataManager)
+            dataManager.notify(Component, id, data);
+    }, [id, dataManager, data]);
+
 
     return (
         <div className="flex
@@ -42,7 +47,7 @@ const ComponentPreviewWrapper = ({id, Component}) => {
         border-dashed
         border-2
         border-transparent
-        " id={id}>
+        " id={`child_${id}`}>
             <div className="absolute group-hover:visible  top-0 left-0 bg-gray-700">
                 <button
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -57,9 +62,10 @@ const ComponentPreviewWrapper = ({id, Component}) => {
 
 };
 
-export const ComponentListView = ({drake, refId}) => {
-
+export const ComponentListView = ({drake, refId, designerViewId, dataManager}) => {
+    const initialId = 0;
     const [componentList, setComponentList] = useState({});
+    const [nextId, setNextId] = useState(initialId);
 
 
     const getComponent = (id) => {
@@ -69,13 +75,17 @@ export const ComponentListView = ({drake, refId}) => {
     useEffect(() => {
         if (drake) {
             drake.on("drop", function (el, target, source, sibling) {
-                if (el && el.parentNode) {
-                    const componentId = el.id;
+                if (el && el.parentNode && target !== source) {
                     const Component = getComponent(el.id);
                     let newNode = document.createElement("div");
-                    // let component = React.createElement(HeroComponentDesign1, {status: "build"});
-                    ReactDOM.render(<ComponentPreviewWrapper Component={Component} id={componentId}/>, newNode);
-                    el.parentNode.replaceChild(newNode, el);
+                    setNextId(prevState => {
+                        const componentId = `component_id_${prevState}`;
+                        newNode.setAttribute("id", componentId);
+                        ReactDOM.render(<ComponentPreviewWrapper dataManager={dataManager} Component={Component}
+                                                                 id={componentId}/>, newNode);
+                        el.parentNode.replaceChild(newNode, el);
+                        return prevState + 1;
+                    });
                 }
             });
         }
@@ -84,9 +94,6 @@ export const ComponentListView = ({drake, refId}) => {
             "component_2": HeroComponentDesign1()
         });
 
-        return () => {
-
-        }
 
     }, [drake]);
 

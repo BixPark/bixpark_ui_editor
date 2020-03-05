@@ -11,6 +11,20 @@ function App() {
     const uiDesignComponent = useRef(null);
 
     const [drake, setDrake] = useState(null);
+    const [siteData, setSiteData] = useState({});
+    const SiteDataManager = {
+        notify: (Component, id, data) => {
+            siteData[id] = {
+                "data": data,
+                "Component": Component
+            };
+            setSiteData(siteData);
+            console.log(siteData);
+        },
+        getSiteData: () => {
+            return siteData;
+        }
+    };
 
     useEffect(() => {
         const right = uiDesignComponent.current;
@@ -41,10 +55,11 @@ function App() {
 
 
             <div className="h-screen flex flex-row flex-wrap flex w-full flex-grow content-start pl-16">
-                <ComponentListView drake={drake} refId={uiComponentList}/>
+                <ComponentListView drake={drake} dataManager={SiteDataManager} refId={uiComponentList}
+                                   designerViewId={uiDesignComponent}/>
 
-                <div id="main-content" className="w-full flex-1  h-screen">
-                    <DesignView refId={uiDesignComponent}/>
+                <div id="main-content" className="w-full flex-1">
+                    <DesignView refId={uiDesignComponent} dataManager={SiteDataManager} drake={drake}/>
                 </div>
             </div>
 
