@@ -4,13 +4,16 @@ import {HeroComponentDesign1} from "../components/hero/design_1";
 import ReactDOM from "react-dom";
 import {HeroComponentDesign2} from "../components/hero/landing_page";
 import {EditorModalComponent} from "./component_data_editor/EditorForm";
+import {ComponentType} from "../components";
+import {ComponentRegistry} from "../components/registry";
 
 
-const ComponentSelectWrapper = ({id, Component}) => {
+const ComponentSelectWrapper = ({id, Component, selectedComponentType}) => {
     console.log(Component);
     return (
         <div
             className="border-2 border-gray-500
+            cursor-move
             border-dashed hover:border-transparent
             hover:bg-gray-600 hover:shadow-xl rounded
             p-2 m-2 md:mx-2 md:my-2 flex justify-center bg-gray-500"
@@ -18,7 +21,8 @@ const ComponentSelectWrapper = ({id, Component}) => {
             <div className="ml-auto mr-auto text-white">
                 <div className="text-center">
                     <Component.preview/>
-                    <h2>{Component.name}</h2>
+                    <h2> {(selectedComponentType === ComponentType.ALL) &&
+                    <strong>({Component.type})</strong>} {Component.name} </h2>
                 </div>
 
             </div>
@@ -101,6 +105,10 @@ export const ComponentListView = ({drake, refId, designerViewId, dataManager}) =
     const initialId = 0;
     const [componentList, setComponentList] = useState({});
     const [nextId, setNextId] = useState(initialId);
+    const [selectedType, setSelectedType] = useState(ComponentType.ALL);
+    const componentTypes = [
+        ComponentType.ALL, ComponentType.NAVIGATION, ComponentType.HERO
+    ];
 
 
     const getComponent = (id) => {
@@ -124,10 +132,7 @@ export const ComponentListView = ({drake, refId, designerViewId, dataManager}) =
                 }
             });
         }
-        setComponentList({
-            "component_1": HeroComponentDesign2(),
-            "component_2": HeroComponentDesign1()
-        });
+        setComponentList(ComponentRegistry);
 
 
     }, [drake]);
@@ -136,7 +141,7 @@ export const ComponentListView = ({drake, refId, designerViewId, dataManager}) =
     return (
         <>
             <div id="dash-content"
-                 className="bg-gray-200 py-2 lg:py-0 w-1/4 lg:max-w-sm h-screen flex flex-wrap content-start">
+                 className="bg-gray-200 py-2 lg:py-0 w-1/6 h-screen flex flex-wrap content-start overflow-auto">
 
                 <nav className="flex flex-wrap items-center justify-center p-2 pb-4">
 
@@ -145,13 +150,43 @@ export const ComponentListView = ({drake, refId, designerViewId, dataManager}) =
 
                 </nav>
 
-                <div className="w-1/2 lg:w-full" ref={refId}>
-                    {Object.entries(componentList).map(([key, value]) => {
-                            return (
-                                <ComponentSelectWrapper key={key} Component={value} id={key}/>
-                            );
-                        }
-                    )}
+                <nav className="items-center justify-center p-2 pb-4">
+                    <div className="inline-block relative w-full">
+                        <select
+                            onChange={(eventTarget) => {
+                                setSelectedType(eventTarget.target.value)
+                            }}
+                            className="block appearance-none w-full flex-grow-0 bg-white border border-gray-400
+                             hover:border-gray-500 px-4 py-2 pr-8 rounded shadow
+                             leading-tight focus:outline-none focus:shadow-outline">
+                            {componentTypes.map((value) => {
+                                return (
+                                    <option className="w-full" value={value}>{value}</option>
+                                );
+                            })}
+
+                        </select>
+                        <div
+                            className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </nav>
+
+                <div className="w-full" ref={refId}>
+                    {Object.entries(componentList).filter(([key, value]) =>
+                        selectedType === ComponentType.ALL || value.type === selectedType)
+                        .map(([key, value]) => {
+                                return (
+                                    <ComponentSelectWrapper
+                                        selectedComponentType={selectedType}
+                                        key={key} Component={value} id={key}/>
+                                );
+                            }
+                        )}
                 </div>
             </div>
         </>

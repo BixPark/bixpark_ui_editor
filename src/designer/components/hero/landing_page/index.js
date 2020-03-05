@@ -2,6 +2,7 @@ import React from 'react';
 import './index.css'
 import {FieldType} from "../../../component_list/component_data_editor/EditorForm";
 import preview from "./preview.svg";
+import {ComponentType} from "../../index";
 
 class PageData {
     tagLine = "TAGLINE";
@@ -81,6 +82,7 @@ const HeroComponentLandingPage = ({data}) => {
 
 export const HeroComponentDesign2 = () => {
     return {
+        "type": ComponentType.HERO,
         "data": new PageData(),
         "formData": FormEditorData,
         "component": HeroComponentLandingPage,

@@ -1,3 +1,7 @@
-.modal-content{
+.modal-content {
     height: 80vh;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
 }

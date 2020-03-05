@@ -2,6 +2,7 @@ import React from 'react';
 import './index.css'
 import {FieldType} from "../../../component_list/component_data_editor/EditorForm";
 import preview from './preview.svg';
+import {ComponentType} from "../../index";
 
 class DataClass {
     header = "The Coldest Sunset";
@@ -43,45 +44,31 @@ export const HeroComponentFormEditorData = (data) => {
     }
 }
 
-const ComponentView = ({data}) => {
-    return (
-        <section className="py-12 px-4 w-full text-center">
-            <h2 className="text-4xl mb-8 font-heading">{data.header}</h2>
-            <div className="max-w-2xl mx-auto"><img
-                className="mt-6 rounded-lg shadow-xl mt-8 h-64 w-full object-cover object-center"
-                src={data.image}
-                alt=""/>
-                <div>
-                    <h3 className="text-2xl mb-4 font-heading">{data.client}</h3>
-                    <p className="text-gray-500 leading-relaxed">{data.description}</p>
-                </div>
-            </div>
-        </section>
-    );
-};
-const ComponentPreview = () => {
-    return (
-        <div className="text-center">
-            <img src={preview} width={150}/>
-            <h2>Header Section 2</h2>
-        </div>
-    );
-};
-
-
 const HeroComponent = ({data}) => {
-    return <ComponentView data={data}/>
+    return (<section className="py-12 px-4 w-full text-center">
+        <h2 className="text-4xl mb-8 font-heading">{data.header}</h2>
+        <div className="max-w-2xl mx-auto"><img
+            className="mt-6 rounded-lg shadow-xl mt-8 h-64 w-full object-cover object-center"
+            src={data.image}
+            alt=""/>
+            <div>
+                <h3 className="text-2xl mb-4 font-heading">{data.client}</h3>
+                <p className="text-gray-500 leading-relaxed">{data.description}</p>
+            </div>
+        </div>
+    </section>)
 };
 
 export const HeroComponentDesign1 = () => {
     return {
+        "type": ComponentType.HERO,
         "data": new DataClass(),
         "formData": HeroComponentFormEditorData,
         "component": HeroComponent,
         "name": "Design 1",
         "preview": () => {
             return (
-                <img src={preview} width={150}/>
+                <img src={preview} width={150} alt={""}/>
             );
         }
     }
