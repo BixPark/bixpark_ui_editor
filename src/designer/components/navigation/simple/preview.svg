@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="212px" height="30px" viewBox="0 0 212 30" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns="http://www.w3.org/2000/svg">
+    <desc>Created with Lunacy</desc>
+    <path d="M0.999 0L210.001 0C210.553 0 211 0.447268 211 0.999L211 28.001C211 28.5527 210.553 29 210.001 29L0.999 29C0.447268 29 0 28.5527 0 28.001L0 0.999C0 0.447268 0.447268 0 0.999 0Z"
+          transform="translate(0.5 0.5)" id="Rectangle-4" fill="#D3D3D3" fill-opacity="0" stroke="#FFFFFF"
+          stroke-width="1"/>
+    <path d="M0.999 0L8.001 0C8.55273 0 9 0.447268 9 0.999L9 1.001C9 1.55273 8.55273 2 8.001 2L0.999 2C0.447268 2 0 1.55273 0 1.001L0 0.999C0 0.447268 0.447268 0 0.999 0Z"
+          transform="translate(82.5 13.50002)" id="Rectangle-3-Copy" fill="#FFFFFF" stroke="none"/>
+    <path d="M0.999 0L8.001 0C8.55273 0 9 0.447268 9 0.999L9 1.001C9 1.55273 8.55273 2 8.001 2L0.999 2C0.447268 2 0 1.55273 0 1.001L0 0.999C0 0.447268 0.447268 0 0.999 0Z"
+          transform="translate(93.50003 13.50002)" id="Rectangle-3-Copy-2" fill="#FFFFFF" stroke="none"/>
+    <path d="M0.999 0L8.001 0C8.55273 0 9 0.447268 9 0.999L9 1.001C9 1.55273 8.55273 2 8.001 2L0.999 2C0.447268 2 0 1.55273 0 1.001L0 0.999C0 0.447268 0.447268 0 0.999 0Z"
+          transform="translate(71.49994 13.50002)" id="Rectangle-3" fill="#FFFFFF" stroke="none"/>
+    <path d="M1.999 0L17.001 0C18.105 0 19 0.894983 19 1.999L19 15.001C19 16.105 18.105 17 17.001 17L1.999 17C0.894983 17 0 16.105 0 15.001L0 1.999C0 0.894983 0.894983 0 1.999 0Z"
+          transform="translate(6.5 5.500015)" id="Rectangle" fill="#FFFFFF" stroke="none"/>
+    <path d="M0.999 0L31.001 0C31.5527 0 32 0.447268 32 0.999L32 5.001C32 5.55273 31.5527 6 31.001 6L0.999 6C0.447268 6 0 5.55273 0 5.001L0 0.999C0 0.447268 0.447268 0 0.999 0Z"
+          transform="translate(30.5 11.50002)" id="Rectangle-2" fill="#FFFFFF" stroke="none"/>
+</svg>

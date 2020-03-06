@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import './index.css'
 import ReactDOM from "react-dom";
 import {EditorModalComponent} from "./component_data_editor/EditorForm";
-import {ComponentType} from "../components";
+import {ComponentType, ComponentTypeList} from "../components";
 import {ComponentRegistry} from "../components/registry";
 
 
@@ -109,9 +109,7 @@ export const ComponentListView = ({drake, refId, designerViewId, dataManager}) =
     const [componentList, setComponentList] = useState({});
     const [nextId, setNextId] = useState(initialId);
     const [selectedType, setSelectedType] = useState(ComponentType.ALL);
-    const componentTypes = [
-        ComponentType.ALL, ComponentType.NAVIGATION, ComponentType.HERO
-    ];
+    const componentTypes = ComponentTypeList;
 
 
     const getComponent = (id) => {
