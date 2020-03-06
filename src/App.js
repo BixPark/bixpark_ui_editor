@@ -55,10 +55,10 @@ function App() {
 
     return (
         <>
-            <SideBar/>
+            {/*<SideBar/>*/}
 
 
-            <div className="h-screen flex flex-row flex-wrap flex w-full flex-grow content-start pl-16">
+            <div className="h-screen flex flex-row flex-wrap flex w-full flex-grow content-start">
                 <ComponentListView drake={drake} dataManager={SiteDataManager} refId={uiComponentList}
                                    designerViewId={uiDesignComponent}/>
 
